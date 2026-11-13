@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0B0B0F"
+    android:padding="16dp">
+
+    <!-- العنوان والهوية البصرية -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FH PASSWORD"
+        android:textColor="#FF1744"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="by nsitou"
+        android:textColor="#B0BEC5"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- زر البحث والتحديث -->
+    <Button
+        android:id="@+id/btnScan"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="بحث عن شبكات fh 🔍"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D50000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"/>
+
+    <!-- قسم تحويل الأكواد -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#16161D"
+        android:padding="12dp"
+        android:layout_marginBottom="15dp">
+
+        <EditText
+            android:id="@+id/etInputCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="fh_b7c1e0"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#78909C"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/btnConvert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تحويل"
+            android:backgroundTint="#37474F"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvConvertedResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="النتيجة المحولة ستظهر هنا"
+        android:textColor="#00E676"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginBottom="15dp"/>
+
+    <!-- قائمة النتائج -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="الشبكات المكتشفة:"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <ListView
+        android:id="@+id/lvNetworks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#212121"
+        android:dividerHeight="1dp"/>
+
+</LinearLayout>
