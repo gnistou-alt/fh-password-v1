@@ -1,10 +1,11 @@
+package com.example.wlanscannerfh;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        wifiManager = (ApplicationContext) getApplicationContext().getSystemService(Context.WIFI_SERVICE); // تعديل استخراج الخدمة
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         lvNetworks = findViewById(R.id.lvNetworks);
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, networkList);
         lvNetworks.setAdapter(adapter);
 
-        // طلب الصلاحيات فور تشغيل التطبيق لحل مشكلة عدم العمل من الداخل
         checkPermissions();
 
         btnScan.setOnClickListener(v -> scanWiFiNetworks());
@@ -76,20 +75,21 @@ public class MainActivity extends AppCompatActivity {
     private void scanWiFiNetworks() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             checkPermissions();
-            Toast.makeText(this, "يرجى منح صلاحية الموقع للبحث", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "يرجى منح صلاحية الموقع للبحث", Toast.LENGTH_SHORT).show();
             return;
         }
 
         networkList.clear();
         try {
-            List<ScanResult> results = wifiManager.getScanResults();
-            if (results != null && !results.isEmpty()) {
-                for (ScanResult result : results) {
-                    String ssid = result.SSID;
-                    // تصفية الشبكات التي تبدأ بـ fh فقط كما طلبت
-                    if (ssid != null && ssid.toLowerCase().startsWith("fh")) {
-                        int signalLevel = result.level;
-                        networkList.add(ssid + " | Power: " + signalLevel + " dBm");
+            if (wifiManager != null) {
+                List<ScanResult> results = wifiManager.getScanResults();
+                if (results != null && !results.isEmpty()) {
+                    for (ScanResult result : results) {
+                        String ssid = result.SSID;
+                        if (ssid != null && ssid.toLowerCase().startsWith("fh")) {
+                            int signalLevel = result.level;
+                            networkList.add(ssid + " | Power: " + signalLevel + " dBm");
+                        }
                     }
                 }
             }
