@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.application' version '8.5.0' apply true
 }
 
 android {
@@ -26,5 +26,5 @@ android {
 }
 
 dependencies {
-    // لا توجد مكتبات خارجية مطلوبة، المشروع يستخدم واجهات أندرويد الأصلية
+    // الواجهات والاعتمادات الأساسية
 }
