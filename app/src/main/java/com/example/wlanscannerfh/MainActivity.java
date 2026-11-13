@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -23,7 +22,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int PERMISSION_REQ_CODE = 123;
     private WifiManager wifiManager;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> networkList;
@@ -32,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // بناء واجهة Cyberpunk سوداء وحمراء برمجياً لتجنب أي أخطاء XML
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setBackgroundColor(0xFF0B0B0F);
@@ -78,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         networkList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, networkList);
+        adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, networkList);
         listView.setAdapter(adapter);
 
-        // طلب الصلاحيات
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQ_CODE);
+        // طلب الصلاحيات بطريقة آمنة
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
         }
 
         btnScan.setOnClickListener(v -> {
@@ -98,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 if (networkList.isEmpty()) {
-                    networkList.add("لا توجد شبكات fh قريبة أو تأكد من تفعيل الموقع");
+                    networkList.add("لا توجد شبكات fh قريبة أو تفعيل الموقع مغلق");
                 }
             } catch (Exception e) {
-                networkList.add("خطأ في الفحص، تأكد من تفعيل الـ GPS");
+                networkList.add("خطأ في الفحص، تأكد من تشغيل الموقع");
             }
             adapter.notifyDataSetChanged();
         });
