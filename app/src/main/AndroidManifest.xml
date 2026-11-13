@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- صلاحيات الواي فاي والموقع المطلوبة حصرياً للبحث -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" android:usesPermissionFlags="neverForLocation" />
+
     <application
         android:allowBackup="false"
         android:icon="@drawable/icon"
         android:roundIcon="@drawable/icon"
-        android:label="fh password"
+        android:label="FH PASSWORD"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
-        
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -17,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-    </application>
 
+    </application>
 </manifest>
